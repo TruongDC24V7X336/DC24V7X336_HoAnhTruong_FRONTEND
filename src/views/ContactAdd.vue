@@ -25,6 +25,8 @@ export default {
         address: "",
         phone: "",
         favorite: false,
+        maritalStatus: "",
+        hobbies: [],
       },
       message: "",
     };

@@ -24,6 +24,47 @@
             <ErrorMessage name="phone" class="error-feedback" />
         </div>
 
+        <div class="form-group">
+            <label for="maritalStatus">Tình trạng hôn nhân</label>
+
+            <div class="ml-2">
+                <label class="mr-3">
+                    <Field name="maritalStatus" type="radio" value="Độc thân" v-model="contactLocal.maritalStatus" />
+                    Độc thân
+                </label>
+
+                <label>
+                    <Field name="maritalStatus" type="radio" value="Đã kết hôn" v-model="contactLocal.maritalStatus" />
+                    Đã kết hôn
+                </label>
+            </div>
+
+            <ErrorMessage name="maritalStatus" class="error-feedback" />
+        </div>
+
+        <div class="form-group">
+            <label for="hobbies">Sở thích</label>
+
+            <div class="ml-2">
+                <label class="mr-3">
+                    <Field name="hobbies" type="checkbox" value="Đá bóng" v-model="contactLocal.hobbies" />
+                    Đá bóng
+                </label>
+
+                <label class="mr-3">
+                    <Field name="hobbies" type="checkbox" value="Đọc sách" v-model="contactLocal.hobbies" />
+                    Đọc sách
+                </label>
+
+                <label>
+                    <Field name="hobbies" type="checkbox" value="Du lịch" v-model="contactLocal.hobbies" />
+                    Du lịch
+                </label>
+            </div>
+
+            <ErrorMessage name="hobbies" class="error-feedback" />
+        </div>
+
         <div class="form-group form-check">
             <input name="favorite" type="checkbox" class="form-check-input" v-model="contactLocal.favorite" />
             <label for="favorite" class="form-check-label">
@@ -60,10 +101,16 @@ export default {
             email: yup.string().email().max(50),
             address: yup.string().max(100),
             phone: yup.string().matches(/((09|03|07|08|05)+([0-9]{8})\b)/g),
+            maritalStatus: yup.string().required(),
+            hobbies: yup.array().of(yup.string()),
         });
 
         return {
-            contactLocal: { ...this.contact },
+            contactLocal: {
+                maritalStatus: "",
+                hobbies: [],
+                ...this.contact,
+            },
             contactFormSchema,
         };
     },
